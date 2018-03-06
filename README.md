@@ -14,3 +14,7 @@ This package includes:
   * robot motion control functions
   * obstacle detection and avoidance functions
   * robot library example nodes
+By calling the mentioned functions, users are able to control and monitor the provided robot platform.
+
+##Configuration Needed
+ * This package was tested on <strong> Ubuntu 16.04 with ROS Kinetic </strong>

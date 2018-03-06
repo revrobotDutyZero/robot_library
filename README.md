@@ -20,3 +20,7 @@ By calling the mentioned functions, users are able to control and monitor the pr
 ## Configuration Needed
  * This package was tested on <strong> Ubuntu 16.04 with ROS Kinetic </strong>
  * The provided robot library only worked with <strong> Duty Zero robot platform </strong>
+
+```
+ $roscore
+```

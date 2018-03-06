@@ -22,5 +22,5 @@ By calling the mentioned functions, users are able to control and monitor the pr
  * The provided robot library only worked with <strong> Duty Zero robot platform </strong>
 
 ```
- $roscore
+ $ roscore
 ```

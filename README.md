@@ -1,4 +1,4 @@
-robot_library
+# robot_library
 ==================
 This package is for any user to integrate their higher level application into the current robot system.
 
@@ -7,7 +7,7 @@ This package includes:
   * subscriber callback functions
   * some conversion functions
   * programmable text-to-speech functions 
-   *support English and Chinese
+   * support English and Chinese
   * base sensor functions
    *set LED color and mode
    *set sound 

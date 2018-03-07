@@ -81,3 +81,6 @@ To run `obstacle detection&avoidance test`:
 
 
 ### Others
+* Refer to `robot_lib_test` package for configuring `CMakeLists.txt` and `package.xml` in order to use robot library
+* Load <strong> robot parameters </strong> in `.launch` file that robot library object requires for initialization
+* Refer to any example node in `robot_lib_test` package to learn how to use robot library 

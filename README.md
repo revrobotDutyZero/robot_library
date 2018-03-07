@@ -49,10 +49,12 @@ This package includes:
 By calling the mentioned functions, users are able to control and monitor the provided robot platform.
 
 
+
 ### Configuration
  * This package was tested on <strong> Ubuntu 16.04 with ROS Kinetic </strong>
  * The provided robot library only worked with <strong> Duty Zero robot platform </strong>
  * It is strongly recommanded that users do not change the source code of provided library to avoid any error
+ 
  
  
 ### Run example nodes
@@ -75,3 +77,7 @@ To run `obstacle detection&avoidance test`:
 ```
  $ roslaunch robot_lib_test obstacle_detection_avoidance.launch
 ```
+
+
+
+### Others

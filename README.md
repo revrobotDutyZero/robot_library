@@ -56,7 +56,7 @@ By calling the mentioned functions, users are able to control and monitor the pr
  
  
 ### Run example nodes
-To run 'sensor&motor test':
+To run `sensor&motor test`:
 ```
  $ roslaunch robot_lib_test hardware_test.launch
 ```

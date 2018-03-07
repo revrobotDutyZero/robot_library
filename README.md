@@ -61,14 +61,17 @@ To run `sensor&motor test`:
  $ roslaunch robot_lib_test hardware_test.launch
 ```
 
+To run `localization&map test`:
 ```
  $ roslaunch robot_lib_test localization_map_test.launch
 ```
 
+To run `goal&motion test`:
 ```
  $ roslaunch robot_lib_test point_route_test.launch
 ```
 
+To run `obstacle detection&avoidance test`:
 ```
  $ roslaunch robot_lib_test obstacle_detection_avoidance.launch
 ```

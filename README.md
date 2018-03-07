@@ -1,5 +1,6 @@
 # robot_library
 
+### Overview
 This package is for any user to integrate their higher level application into the current robot system.
 
 This package includes:
@@ -48,13 +49,13 @@ This package includes:
 By calling the mentioned functions, users are able to control and monitor the provided robot platform.
 
 
-## Configuration Needed
+### Configuration
  * This package was tested on <strong> Ubuntu 16.04 with ROS Kinetic </strong>
  * The provided robot library only worked with <strong> Duty Zero robot platform </strong>
  * It is strongly recommanded that users do not change the source code of provided library to avoid any error
  
  
-## Run example nodes
+### Run example nodes
 ```
  $ roslaunch robot_lib_test hardware_test.launch
 ```

@@ -52,7 +52,7 @@ By calling the mentioned functions, users are able to control and monitor the pr
 
 ### Configuration
  * This package was tested on <strong> Ubuntu 16.04 with ROS Kinetic </strong>
- * The provided robot library only worked with <strong> Duty Zero robot platform </strong>
+ * The provided robot library only worked with <strong> designated robot platform </strong>
  * It is strongly recommanded that users do not change the source code of provided library to avoid any error
  
  
@@ -82,5 +82,5 @@ To run `obstacle detection&avoidance test`:
 
 ### Others
 * Refer to `robot_lib_test` package for configuring `CMakeLists.txt` and `package.xml` in order to use robot library
-* Load <strong> robot parameters </strong> in `.launch` file that robot library object requires for initialization
+* Load <strong> robot_lib_params </strong> in `.launch` file that robot library object requires for initialization
 * Refer to any example node in `robot_lib_test` package to learn how to use robot library 

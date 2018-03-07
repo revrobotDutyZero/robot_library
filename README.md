@@ -9,10 +9,10 @@ This package includes:
   * programmable text-to-speech functions 
    * support English and Chinese
   * base sensor functions
-   *set LED color and mode
-   *set sound 
-   *get battery data
-   *get gyro data
+   * set LED color and mode
+   * set sound 
+   * get battery data
+   * get gyro data
   * base motor functions
    - set motor velocities
    - set linear/angular velocity limit

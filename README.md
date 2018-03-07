@@ -8,7 +8,7 @@ This package includes:
   * some conversion functions
   * programmable text-to-speech functions 
    *support English and Chinese
-   *base sensor functions
+  * base sensor functions
    *set LED color and mode
    *set sound 
    *get battery data

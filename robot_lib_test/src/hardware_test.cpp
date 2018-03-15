@@ -114,6 +114,10 @@ int main(int argc, char **argv)
     int left_vel, right_vel;
     robot_lib.getMotorSpeed(left_vel,right_vel);
     ROS_INFO("Wheel velocity readings: left %d, right %d", left_vel,right_vel);
+
+    float load_weight = robot_lib.getWeight();
+    ROS_INFO("Load weight: %f (kg)", load_weight);
+    
     ros::spinOnce();
     ros::Duration(1.0).sleep();
   }

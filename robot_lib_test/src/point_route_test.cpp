@@ -82,7 +82,7 @@ int main(int argc, char **argv)
   //robot_lib.stopRobot();
   //robot_lib.startDock();
   //robot_lib.stopDock();
-  //robot_lib.shutdown();
+  //robot_lib.shutDown();
 
   //ros::spin();
   return 0;

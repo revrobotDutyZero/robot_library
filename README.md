@@ -16,6 +16,7 @@ This package includes:
     * set sound 
     * get battery data
     * get gyro data
+	* get load weight
   * base motor functions
     * set motor velocities
     * set linear/angular velocity limit

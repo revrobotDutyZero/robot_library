@@ -86,9 +86,10 @@ namespace robot_class {
     //Do remember to initilize class after ros::init if setMotorSpeed is used
     bool SetRobot::setMotorSpeed(const char directionR, const int velocityR, const char directionL, const int velocityL){ 
         motor_speed_.directionR = std::string(1, directionR);
-        motor_speed_.velocityR = velocityR;
+        //maximum of int8 is 127
+        motor_speed_.velocityR = velocityR>127 ? 127 : velocityR;
         motor_speed_.directionL = std::string(1, directionL);
-        motor_speed_.velocityL = velocityL;
+        motor_speed_.velocityL = velocityL>127 ? 127 : velocityL;
         speed_pub_.publish(motor_speed_);
         return true;
     }
@@ -129,7 +130,7 @@ namespace robot_class {
        if(simulation)
             cmd = "gnome-terminal -x bash -c \"source /opt/ros/kinetic/setup.bash;source ~/catkin_ws/devel/setup.bash;roslaunch gobot_gazebo gazebo_slam.launch\"";
         else
-            cmd = "gnome-terminal -x bash -c \"source /opt/ros/kinetic/setup.bash;source ~/catkin_ws/devel/setup.bash;roslaunch gobot_navigation gobot_navigation.launch\"";
+            cmd = "gnome-terminal -x bash -c \"source /opt/ros/kinetic/setup.bash;source ~/catkin_ws/devel/setup.bash;roslaunch gobot_navigation gobot_navigation.launch >> ~/catkin_ws/src/gobot_navigation_stack/robot_log/navigation_log.txt\"";
         system(cmd.c_str());
         ros::Duration(4.0).sleep();
     }
@@ -145,19 +146,19 @@ namespace robot_class {
         if(simulation)
             cmd = "gnome-terminal -x bash -c \"source /opt/ros/kinetic/setup.bash;source ~/catkin_ws/devel/setup.bash;roslaunch gobot_gazebo gazebo_scan.launch\"";
         else
-            cmd = "gnome-terminal -x bash -c \"source /opt/ros/kinetic/setup.bash;source ~/catkin_ws/devel/setup.bash;roslaunch gobot_navigation gobot_scan.launch\"";
+            cmd = "gnome-terminal -x bash -c \"source /opt/ros/kinetic/setup.bash;source ~/catkin_ws/devel/setup.bash;roslaunch gobot_navigation gobot_scan.launch >> ~/catkin_ws/src/gobot_navigation_stack/robot_log/navigation_log.txt\"";
         system(cmd.c_str());
         ros::Duration(4.0).sleep();
     }
 
     //this two functions only work with robot equipped with speaker and ekho & festival packages
     void SetRobot::speakEnglish(std::string str){
-        tts_en_ = "echo \"" + str + "\" | festival --tts";
+        tts_en_ = "echo \"" + str + "\" | festival --tts &";
         system(tts_en_.c_str());
     }
 
     void SetRobot::speakChinese(std::string str){
-        tts_ch_ = "ekho -s -25 \"" + str + "\"";
+        tts_ch_ = "ekho -s -30 \"" + str + "\" &";
         system(tts_ch_.c_str());
     }
     //this two functions only work with robot equipped with speaker and ekho & festival packages

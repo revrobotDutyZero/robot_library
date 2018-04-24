@@ -5,6 +5,7 @@
 #include <ros/ros.h>
 #include <std_msgs/Int8.h>
 #include <std_srvs/Empty.h>
+#include <geometry_msgs/PoseWithCovarianceStamped.h>
 
 //c++ headers
 #include <string>
@@ -20,6 +21,8 @@ namespace robot_class {
             SetRobot();
             ~SetRobot();
             void initialize();
+
+            int stopRobotMoving();
 
             bool setStatus(int status,std::string text);
             
@@ -45,17 +48,23 @@ namespace robot_class {
 
             bool setMotorSpeed(char directionR, int velocityR, char directionL, int velocityL);
 
+            void setInitialpose(const double p_x, const double p_y, const double q_x, const double q_y, const double q_z, const double q_w);
+            
+            void setInitialpose(geometry_msgs::PoseWithCovarianceStamped pose);
+
             void setBatteryLed();
             
             void setSound(int num,int time_on);
 
             void setLed(int mode, const std::vector<std::string> &color);
             
-            std::string killList(bool simulation);
+            std::string killList();
 
-            void runNavi(bool simulation);
+            void reloadMap();
+            
+            void runNavi(bool simulation, bool reset_odom=true);
 
-            void runScan(bool simulation);
+            void runScan(bool simulation, bool reset_odom=true);
 
             void speakEnglish(std::string str);
 
@@ -67,7 +76,7 @@ namespace robot_class {
             gobot_msg_srv::SetGobotStatus set_gobot_status_;
             gobot_msg_srv::SetInt set_dock_status_,set_stage_,set_loop_;
             gobot_msg_srv::MotorSpeedMsg motor_speed_;
-            ros::Publisher speed_pub_, sound_pub_, led_pub_;
+            ros::Publisher speed_pub_, sound_pub_, led_pub_, initial_pose_pub_;
     };
 };
 

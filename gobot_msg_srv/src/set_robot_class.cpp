@@ -18,6 +18,30 @@ namespace robot_class {
         speed_pub_ = nh_.advertise<gobot_msg_srv::MotorSpeedMsg>("/gobot_motor/motor_speed", 1);
         led_pub_ = nh_.advertise<gobot_msg_srv::LedMsg>("/gobot_base/set_led", 1);
         sound_pub_ = nh_.advertise<gobot_msg_srv::SoundMsg>("/gobot_base/set_sound", 1);
+        initial_pose_pub_ = nh_.advertise<geometry_msgs::PoseWithCovarianceStamped>("/initialpose", 1);
+    }
+
+    int SetRobot::stopRobotMoving(){
+        gobot_msg_srv::GetGobotStatus get_gobot_status;
+        ros::service::call("/gobot_status/get_gobot_status",get_gobot_status);
+
+        //if robot is navigation / auto docking / scanning, then return the status
+        if(get_gobot_status.response.status==5){
+            ros::service::call("/gobot_command/pause_path",empty_srv);
+            return get_gobot_status.response.status;
+        }
+        else if(get_gobot_status.response.status==15){
+            ros::service::call("/gobot_command/stopGoDock",empty_srv);
+            return get_gobot_status.response.status;
+        }
+        else if(get_gobot_status.response.status==25){
+            ros::service::call("/gobot_command/stop_explore",empty_srv);
+            return get_gobot_status.response.status;
+        }
+        else{
+            //if robot is not moving, then return 0
+            return 0;
+        }
     }
 
     bool SetRobot::setStatus(int status,std::string text){
@@ -108,6 +132,31 @@ namespace robot_class {
         sound_pub_.publish(soundCmd);
     }
     
+    void SetRobot::setInitialpose(const double p_x, const double p_y, const double q_x, const double q_y, const double q_z, const double q_w){
+        geometry_msgs::PoseWithCovarianceStamped initial_pose;
+        initial_pose.pose.pose.position.x = p_x;
+        initial_pose.pose.pose.position.y = p_y;
+        initial_pose.pose.pose.orientation.x = q_x;
+        initial_pose.pose.pose.orientation.y = q_y;
+        initial_pose.pose.pose.orientation.z = q_z;
+        initial_pose.pose.pose.orientation.w = q_w;
+        setInitialpose(initial_pose);
+    }
+            
+    void SetRobot::setInitialpose(geometry_msgs::PoseWithCovarianceStamped pose){
+        pose.header.frame_id = "map";
+        pose.header.stamp = ros::Time::now();
+        //x-xy-y,yaw-yaw covariance
+        pose.pose.covariance[0] = 0.01;
+        pose.pose.covariance[7] = 0.01;
+        pose.pose.covariance[35] = 0.01;
+        if(pose.pose.pose.position.x == 0 && pose.pose.pose.position.y == 0 && pose.pose.pose.orientation.z == 0 && pose.pose.pose.orientation.w == 0){
+            ROS_ERROR("(SET_ROBOT_CLASS) Assigned pose is invalid, set it position to map origin");
+            pose.pose.pose.orientation.w = 1.0;
+        }
+        initial_pose_pub_.publish(pose);
+    }
+
     void SetRobot::setBatteryLed(){
         gobot_msg_srv::LedMsg ledCmd; 
         ledCmd.mode = -1;
@@ -122,14 +171,26 @@ namespace robot_class {
         led_pub_.publish(ledCmd);
     }
 
-    std::string SetRobot::killList(bool simulation){
+    std::string SetRobot::killList(){
         return "rosnode kill /move_base"; 
     }
 
-    void SetRobot::runNavi(bool simulation){
+    void SetRobot::reloadMap(){
         setMotorSpeed('F', 0, 'F', 0);
         setLed(0,{"white"});
-        ros::service::call("/gobot_motor/resetOdom",empty_srv);
+        std::string cmd = "rosnode kill /map_server";
+        system(cmd.c_str());
+        ros::Duration(3.0).sleep();
+        setStatus(-1,"ROBOT_READY");
+        setBatteryLed();
+    }
+
+
+    void SetRobot::runNavi(bool simulation, bool reset_odom){
+        setMotorSpeed('F', 0, 'F', 0);
+        setLed(0,{"white"});
+        if(reset_odom)
+            ros::service::call("/gobot_motor/resetOdom",empty_srv);
 
         std::string cmd;
         ros::Duration(4.0).sleep();
@@ -139,13 +200,14 @@ namespace robot_class {
         else
             cmd = "gnome-terminal -x bash -c \"source /opt/ros/kinetic/setup.bash;source ~/catkin_ws/devel/setup.bash;roslaunch gobot_navigation gobot_navigation.launch >> ~/catkin_ws/src/robot_navigation_stack/robot_log/navigation_log.txt\"";
         system(cmd.c_str());
-        ros::Duration(4.0).sleep();
+        ros::Duration(6.0).sleep();
     }
 
-    void SetRobot::runScan(bool simulation){
+    void SetRobot::runScan(bool simulation, bool reset_odom){
         setMotorSpeed('F', 0, 'F', 0);
         setLed(0,{"white"});
-        ros::service::call("/gobot_motor/resetOdom",empty_srv);
+        if(reset_odom)
+            ros::service::call("/gobot_motor/resetOdom",empty_srv);
         
         std::string cmd;
         ros::Duration(4.0).sleep();
@@ -155,7 +217,7 @@ namespace robot_class {
         else
             cmd = "gnome-terminal -x bash -c \"source /opt/ros/kinetic/setup.bash;source ~/catkin_ws/devel/setup.bash;roslaunch gobot_navigation gobot_scan.launch >> ~/catkin_ws/src/robot_navigation_stack/robot_log/navigation_log.txt\"";
         system(cmd.c_str());
-        ros::Duration(4.0).sleep();
+        ros::Duration(6.0).sleep();
     }
 
     //this two functions only work with robot equipped with speaker and ekho & festival packages

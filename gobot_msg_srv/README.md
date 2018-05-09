@@ -1,8 +1,9 @@
-# MESSAGE, SERVICE, AND TOPIC SUMMARY
+# Message, Service, and Topic Summary
 
 ### Overview
 This package summurizes all the <strong> customized </strong> messages, services and topics to build up the mobile robot system. 
-For ROS built-in message (e.g. `std_msgs`, `geometry_msgs`), service (e.g. `std_srvs`) will not be involved.
+
+ROS built-in message(e.g. `std_msgs, geometry_msgs`) and service(e.g. `std_srvs`) are not involved, and please refer to http://wiki.ros.org/ for more deail. 
 
 ### Customized Messages
 * BatteryMsg.msg

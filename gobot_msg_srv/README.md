@@ -137,81 +137,134 @@ This package summurizes all the <strong> customized </strong> messages, services
 		* string data[]
 	* Response:
 
-### Customized topics
+### Customized topic
 * /cmd_vel
 	* Type: geometry_msgs/Twist
+	* Brief: linear and angular velocities computed by global/local planners
 * /encoders
 	* Type: gobot_msg_srv/EncodersMsg
+	* Brief: accumulated motor left and right encoders' values to compute robot translational and rotational distance
 * /initialpose
 	* Type: geometry_msgs/PoseWithCovarianceStamped
+	* Brief: set robot initial pose on the map
 * /joy_connection
 	* Type: std_msgs/Int8
+	* Brief: joystick connnection state
+	* Detail: 
+		* 1 - connected 
+		* 0 - disconnected
 * /joy
 	* Type: sensor_msgs/Joy
+	* Brief: joystick feedback when axes or buttons are pressed
 * /map
 	* Type: nav_msgs/OccupancyGrid
+	* Brief: currently used map for navigation
 * /map_metadata
 	* Type: nav_msgs/MapMetaData
+	* Brief: currently used map metadata
 * /move_base/NavfnROS/plan
 	* Type: nav_msgs/Path
+	* Brief: the last plan computed and published every time the planner computes a new path from current pose to goal
 * /move_base/cancel
 	* Type: actionlib_msgs/GoalID
+	* Brief: a request to cancel a specific goal
 * /move_base/goal
 	* Type: move_base_msgs/MoveBaseActionGoal
+	* Brief: a goal for robot to pursue on the map
 * /move_base/result
 	* Type: move_base_msgs/MoveBaseActionResult
+	* Brief: provide terminal status on the lastest goal that is sent to robot
 * /odom
 	* Type: nav_msgs/Odometry
+	* Brief: odometry data to estimate change in position
 * /robot_pose
 	* Type: geometry_msgs/Pose
+	* Brief: robot's current pose w.r.t the map frame
 * /scan
 	* Type: sensor_msgs/LaserScan
+	* Brief: laser information
 * /gobot_base/battery_topic
 	* Type: gobot_msg_srv::BatteryMsg
+	* Brief: battery information
 * /gobot_base/bumpers_raw_topic
 	* Type: gobot_msg_srv::BumperMsg
-* /gobot_base/bumpers_raw_topic
+	* Brief: bumpers raw information
+* /gobot_base/bumpers_collision_topic
 	* Type: gobot_msg_srv::BumperMsg
+	* Brief: bumpers information when collision
 * /gobot_base/bumpers_topic
 	* Type: gobot_msg_srv::BumperMsg
+	* Brief: bumpers information after checking bumpers broken state
 * /gobot_base/button_topic
 	* Type: std_msgs::Int8
+	* Brief: customized button information
 * /gobot_base/cliff_topic
 	* Type: gobot_msg_srv::CliffMsg
+	* Brief: cliff information
 * /gobot_base/gyro_topic
 	* Type: gobot_msg_srv::GyroMsg
+	* Brief: gyro information
 * /gobot_base/ir_topic
 	* Type: gobot_msg_srv::IrMsg
+	* Brief: infrads information
 * /gobot_base/proximity_topic
 	* Type: gobot_msg_srv::ProximityMsg
+	* Brief: proximity information
 * /gobot_base/set_led
 	* Type: gobot_msg_srv::LedMsg
+	* Brief: set led colors that robot shows in each side
 * /gobot_base/set_sound
 	* Type: gobot_msg_srv::SoundMsg
+	* Brief: set buzzer sound times and duration
 * /gobot_base/sonar_topic
 	* Type: gobot_msg_srv::SonarMsg
+	* Brief: sonar information
 * /gobot_base/temperature_topic
 	* Type: std_msgs::Float32
+	* Brief: temperature information
 * /gobot_base/weight_topic
 	* Type: gobot_msg_srv::WeightMsg
+	* Brief: weight information
 * /gobot_motor/motor_speed
 	* Type: gobot_msg_srv/MotorSpeedMsg
+	* Brief: set motor left and right speeds 
 * /gobot_status/gobot_status
 	* Type: std_msgs/Int8
+	* Brief: current robot state
+	* Detail: 
+		* 25 - EXPLORING
+		* 21 - STOP_EXPLORING/COMPLETE_EXPLORING
+		* 20 - EXPLORATION
+		* 15 - DOCKING
+		* 11 - STOP_DOCKING/FAIL_DOKCING/COMPLETE_DOCKING
+		* 5  - PLAY_PATH/WAITING/DELAY/PLAY_POINT
+		* 4  - PAUSE_PATH
+		* 1  - STOP_PATH
+		* 0  - COMPLETE_PATH/ABORTED_PATH/COMPLETE_POINT
+		* -1 - ROBOT_READY
 * /gobot_status/mute
 	* Type: std_msgs/Int8 
+	* Brief: mute/unmute buzzer sound
+	* Detail: 
+		* 1 - mute 
+		* 0 - unmute
 * /gobot_status/update_information
 	* Type: std_msgs/String
+	* Brief: information that robot will send to server side
 * /gobot_software/connected_servers
 	* Type: gobot_msg_srv/StringArrayMsg
+	* Brief: connected servers IP address
 * /gobot_software/online_servers
 	* Type: gobot_msg_srv/StringArrayMsg
+	* Brief: all available IP address in the local network
 * /gobot_software/server_disconnected
 	* Type: std_msgs/String
+	* Brief: disconnect server by publishing its IP address
 * /gobot_pc/~
 	* Type: sensor_msgs/PointCloud2 
+	* Brief: pointcloud information for bumpers, sonars, and cliffs sensors
 
-### Customized services
+### Customized service
 * /gobot_base/set_charging
 	* Type: gobot_msg_srv/SetBool
 * /gobot_base/set_joy_speed

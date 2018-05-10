@@ -213,9 +213,19 @@ This package summurizes all the <strong> customized </strong> messages, services
 * /gobot_base/set_led
 	* Type: gobot_msg_srv::LedMsg
 	* Brief: set led colors that robot shows in each side
+	* Detail:
+		* mode -1 - show battery level led
+		* mode  0 - show permanent led
+		* mode  1 - show running led
+		* color - colors that is going to show
 * /gobot_base/set_sound
 	* Type: gobot_msg_srv::SoundMsg
 	* Brief: set buzzer sound times and duration
+	* Detail:
+		* num - how many times buzzer will beep 
+		* time_on 1 - each beep last for 100ms
+		* time_on 2 - each beep last for 400ms
+		* time_on others - each beep last for 800ms
 * /gobot_base/sonar_topic
 	* Type: gobot_msg_srv::SonarMsg
 	* Brief: sonar information
@@ -231,17 +241,18 @@ This package summurizes all the <strong> customized </strong> messages, services
 * /gobot_status/gobot_status
 	* Type: std_msgs/Int8
 	* Brief: current robot state
-	* Detail: 
-		* 25 - EXPLORING
-		* 21 - STOP_EXPLORING/COMPLETE_EXPLORING
-		* 20 - EXPLORATION
-		* 15 - DOCKING
+	* Detail:
+		* -1 - ROBOT_READY 
+		*  0 - COMPLETE_PATH/ABORTED_PATH/COMPLETE_POINT
+		*  1 - STOP_PATH
+		*  4 - PAUSE_PATH
+		*  5 - PLAY_PATH/WAITING/DELAY/PLAY_POINT
 		* 11 - STOP_DOCKING/FAIL_DOKCING/COMPLETE_DOCKING
-		* 5  - PLAY_PATH/WAITING/DELAY/PLAY_POINT
-		* 4  - PAUSE_PATH
-		* 1  - STOP_PATH
-		* 0  - COMPLETE_PATH/ABORTED_PATH/COMPLETE_POINT
-		* -1 - ROBOT_READY
+		* 15 - DOCKING
+		* 20 - EXPLORATION
+		* 21 - STOP_EXPLORING/COMPLETE_EXPLORING
+		* 25 - EXPLORING
+		* text - describe current robot state
 * /gobot_status/mute
 	* Type: std_msgs/Int8 
 	* Brief: mute/unmute buzzer sound
@@ -267,6 +278,7 @@ This package summurizes all the <strong> customized </strong> messages, services
 ### Customized service
 * /gobot_base/set_charging
 	* Type: gobot_msg_srv/SetBool
+	* Detail:
 * /gobot_base/set_joy_speed
 	* Type: gobot_msg_srv/SetFloatArray
 * /gobot_base/shutdown_robot
@@ -391,3 +403,6 @@ This package summurizes all the <strong> customized </strong> messages, services
 	* Type: std_srvs/Empty	
 * /static_map
 	* Type: nav_msgs/SetMap
+	
+	
+<strong> Enjoy and have fun! </strong> <br> Hope our effort on developing robotics will make a better world. 

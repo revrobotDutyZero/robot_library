@@ -71,74 +71,74 @@ This package summurizes all the <strong> customized </strong> messages, services
 
 ### Customized srv
 * GetEncoders.srv
-	* `Request`:
-	* `Response`:
+	* `Request:`
+	* `Response:`
 		* int32 leftEncoder
 		* int32 rightEncoder
 * GetGobotStatus.srv
-	* `Request`:
-	* `Response`:
+	* `Request:`
+	* `Response:`
 		* string text
 		* int16 status
 * GetInt.srv
-	* `Request`:
-	* `Response`:
+	* `Request:`
+	* `Response:`
 		* int16 data
 * GetIntArray.srv
-	* `Request`:
-	* `Response`:
+	* `Request:`
+	* `Response:`
 		* int16[] data
 * GetString.srv
-	* `Request`:
-	* `Response`:
+	* `Request:`
+	* `Response:`
 		* string data
 * GetStringArray.srv
-	* `Request`:
-	* `Response`:
+	* `Request:`
+	* `Response:`
 		* string[] data
 * IsCharging.srv
-	* `Request`:
-	* `Response`:
+	* `Request:`
+	* `Response:`
 		* bool isCharging
 * SendMap.srv
-	* `Request`:
+	* `Request:`
 		* string ip
 		* int8 who
-	* `Response`:
+	* `Response:`
 * SendMessageToPc.srv
-	* `Request`:
+	* `Request:`
 		* string msg
 		* int16 port
-	* `Response`:
+	* `Response:`
 * SetBool.srv
-	* `Request`:
+	* `Request:`
 		* bool data
-	* `Response`:
+	* `Response:`
 * SetFloatArray.srv
-	* `Request`:
+	* `Request:`
 		* float32[] data
-	* `Response`:
+	* `Response:`
 * SetGobotStatus.srv
-	* `Request`:
+	* `Request:`
 		* string text
 		* int16 status
-	* `Response`:
+	* `Response:`
 * SetInt.srv
-	* `Request`:
+	* `Request:`
 		* int16 data
-	* `Response`:
+	* `Response:`
 * SetIntArray.srv
-	* `Request`:
+	* `Request:`
 		* int16[] data
-	* `Response`:
+	* `Response:`
 * SetString.srv
-	* `Request`:
+	* `Request:`
 		* string data
-	* `Response`:
+	* `Response:`
 * SetStringArray.srv
-	* `Request`:
+	* `Request:`
 		* string data[]
-	* `Response`:
+	* `Response:`
 
 
 ### Customized topic
@@ -405,7 +405,7 @@ This package summurizes all the <strong> customized </strong> messages, services
 		* 1 - mute
 * /gobot_status/get_name
 	* Type: `gobot_msg_srv/GetString`
-	* Detail: get robot name
+	* Brieft: get robot name
 * /gobot_status/get_path
 	* Type: `gobot_msg_srv/GetString`
 	* Brief: get robot assigned path
@@ -442,7 +442,7 @@ This package summurizes all the <strong> customized </strong> messages, services
 * /gobot_status/set_mute
 	* Type: `gobot_msg_srv/SetInt`
 	* Brief: set mute state
-	* Detail: /gobot_status/get_mute
+	* Detail: refer to /gobot_status/get_mute
 * /gobot_status/set_name
 	* Type: `gobot_msg_srv/SetString`
 	* Brief: set robot name 

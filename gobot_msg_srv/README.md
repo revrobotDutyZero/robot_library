@@ -139,79 +139,79 @@ This package summurizes all the <strong> customized </strong> messages, services
 
 ### Customized topic
 * /cmd_vel
-	* Type: geometry_msgs/Twist
+	* Type: `geometry_msgs/Twist`
 	* Brief: linear and angular velocities computed by global/local planners
 * /encoders
-	* Type: gobot_msg_srv/EncodersMsg
+	* Type: `gobot_msg_srv/EncodersMsg`
 	* Brief: accumulated motor left and right encoders' values to compute robot translational and rotational distance
 * /initialpose
-	* Type: geometry_msgs/PoseWithCovarianceStamped
+	* Type: `geometry_msgs/PoseWithCovarianceStamped`
 	* Brief: set robot initial pose on the map
 * /joy_connection
-	* Type: std_msgs/Int8
+	* Type: `std_msgs/Int8`
 	* Brief: joystick connnection state
 	* Detail: 
 		* 1 - connected 
 		* 0 - disconnected
 * /joy
-	* Type: sensor_msgs/Joy
+	* Type: `sensor_msgs/Joy`
 	* Brief: joystick feedback when axes or buttons are pressed
 * /map
-	* Type: nav_msgs/OccupancyGrid
+	* Type: `nav_msgs/OccupancyGrid`
 	* Brief: currently used map for navigation
 * /map_metadata
-	* Type: nav_msgs/MapMetaData
+	* Type: `nav_msgs/MapMetaData`
 	* Brief: currently used map metadata
 * /move_base/NavfnROS/plan
-	* Type: nav_msgs/Path
+	* Type: `nav_msgs/Path`
 	* Brief: the last plan computed and published every time the planner computes a new path from current pose to goal
 * /move_base/cancel
-	* Type: actionlib_msgs/GoalID
+	* Type: `actionlib_msgs/GoalID`
 	* Brief: a request to cancel a specific goal
 * /move_base/goal
-	* Type: move_base_msgs/MoveBaseActionGoal
+	* Type: `move_base_msgs/MoveBaseActionGoal`
 	* Brief: a goal for robot to pursue on the map
 * /move_base/result
-	* Type: move_base_msgs/MoveBaseActionResult
+	* Type: `move_base_msgs/MoveBaseActionResult`
 	* Brief: provide terminal status on the lastest goal that is sent to robot
 * /odom
-	* Type: nav_msgs/Odometry
+	* Type: `nav_msgs/Odometry`
 	* Brief: odometry data to estimate change in position
 * /robot_pose
-	* Type: geometry_msgs/Pose
+	* Type: `geometry_msgs/Pose`
 	* Brief: robot's current pose w.r.t the map frame
 * /scan
-	* Type: sensor_msgs/LaserScan
+	* Type: `sensor_msgs/LaserScan`
 	* Brief: laser information
 * /gobot_base/battery_topic
-	* Type: gobot_msg_srv::BatteryMsg
+	* Type: `gobot_msg_srv::BatteryMsg`
 	* Brief: battery information
 * /gobot_base/bumpers_raw_topic
-	* Type: gobot_msg_srv::BumperMsg
+	* Type: `gobot_msg_srv::BumperMsg`
 	* Brief: bumpers raw information
 * /gobot_base/bumpers_collision_topic
-	* Type: gobot_msg_srv::BumperMsg
+	* Type: `gobot_msg_srv::BumperMsg`
 	* Brief: bumpers information when collision
 * /gobot_base/bumpers_topic
-	* Type: gobot_msg_srv::BumperMsg
+	* Type: `gobot_msg_srv::BumperMsg`
 	* Brief: bumpers information after checking bumpers broken state
 * /gobot_base/button_topic
-	* Type: std_msgs::Int8
+	* Type: `std_msgs::Int8`
 	* Brief: customized button information
 * /gobot_base/cliff_topic
-	* Type: gobot_msg_srv::CliffMsg
+	* Type: `gobot_msg_srv::CliffMsg`
 	* Brief: cliff information
 * /gobot_base/gyro_topic
-	* Type: gobot_msg_srv::GyroMsg
+	* Type: `gobot_msg_srv::GyroMsg`
 	* Brief: gyro information
 * /gobot_base/ir_topic
-	* Type: gobot_msg_srv::IrMsg
+	* Type: `gobot_msg_srv::IrMsg`
 	* Brief: infrads information
 * /gobot_base/proximity_topic
-	* Type: gobot_msg_srv::ProximityMsg
+	* Type: `gobot_msg_srv::ProximityMsg`
 	* Brief: proximity information
 * /gobot_base/set_led
-	* Type: gobot_msg_srv::LedMsg
+	* Type: `gobot_msg_srv::LedMsg`
 	* Brief: set led colors that robot shows in each side
 	* Detail:
 		* mode -1 - show battery level led
@@ -219,7 +219,7 @@ This package summurizes all the <strong> customized </strong> messages, services
 		* mode  1 - show running led
 		* color - colors that is going to show
 * /gobot_base/set_sound
-	* Type: gobot_msg_srv::SoundMsg
+	* Type: `gobot_msg_srv::SoundMsg`
 	* Brief: set buzzer sound times and duration
 	* Detail:
 		* num - how many times buzzer will beep 
@@ -227,19 +227,19 @@ This package summurizes all the <strong> customized </strong> messages, services
 		* time_on 2 - each beep last for 400ms
 		* time_on others - each beep last for 800ms
 * /gobot_base/sonar_topic
-	* Type: gobot_msg_srv::SonarMsg
+	* Type: `gobot_msg_srv::SonarMsg`
 	* Brief: sonar information
 * /gobot_base/temperature_topic
-	* Type: std_msgs::Float32
+	* Type: `std_msgs::Float32`
 	* Brief: temperature information
 * /gobot_base/weight_topic
-	* Type: gobot_msg_srv::WeightMsg
+	* Type: `gobot_msg_srv::WeightMsg`
 	* Brief: weight information
 * /gobot_motor/motor_speed
-	* Type: gobot_msg_srv/MotorSpeedMsg
+	* Type: `gobot_msg_srv/MotorSpeedMsg`
 	* Brief: set motor left and right speeds 
 * /gobot_status/gobot_status
-	* Type: std_msgs/Int8
+	* Type: `std_msgs/Int8`
 	* Brief: current robot state
 	* Detail:
 		* -1 - ROBOT_READY 
@@ -254,155 +254,155 @@ This package summurizes all the <strong> customized </strong> messages, services
 		* 25 - EXPLORING
 		* text - describe current robot state
 * /gobot_status/mute
-	* Type: std_msgs/Int8 
+	* Type: `std_msgs/Int8`
 	* Brief: mute/unmute buzzer sound
 	* Detail: 
 		* 1 - mute 
 		* 0 - unmute
 * /gobot_status/update_information
-	* Type: std_msgs/String
+	* Type: `std_msgs/String`
 	* Brief: information that robot will send to server side
 * /gobot_software/connected_servers
 	* Type: gobot_msg_srv/StringArrayMsg
-	* Brief: connected servers IP address
+	* Brief: `connected servers IP address`
 * /gobot_software/online_servers
-	* Type: gobot_msg_srv/StringArrayMsg
+	* Type: `gobot_msg_srv/StringArrayMsg`
 	* Brief: all available IP address in the local network
 * /gobot_software/server_disconnected
-	* Type: std_msgs/String
+	* Type: `std_msgs/String`
 	* Brief: disconnect server by publishing its IP address
 * /gobot_pc/~
-	* Type: sensor_msgs/PointCloud2 
+	* Type: `sensor_msgs/PointCloud2`
 	* Brief: pointcloud information for bumpers, sonars, and cliffs sensors
 
 ### Customized service
 * /gobot_base/set_charging
-	* Type: gobot_msg_srv/SetBool
+	* Type: `gobot_msg_srv/SetBool`
 	* Detail:
 * /gobot_base/set_joy_speed
-	* Type: gobot_msg_srv/SetFloatArray
+	* Type: `gobot_msg_srv/SetFloatArray`
 * /gobot_base/shutdown_robot
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_base/use_bumper
-	* Type: gobot_msg_srv/SetBool
-* /gobot_base/use_cliff
-	* Type: gobot_msg_srv/SetBool
+	* Type: gobot_msg_srv/SetBool`
+* /gobot_bas`e/use_cliff
+	* Type: `gobot_msg_srv/SetBool`
 * /gobot_base/use_sonar
-	* Type: gobot_msg_srv/SetBool
+	* Type: `gobot_msg_srv/SetBool`
 * /gobot_command/goDock
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_command/lowBattery
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_command/pause_path
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_command/play_path
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_command/play_point
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_command/set_path
-	* Type: gobot_msg_srv/SetStringArray
+	* Type: `gobot_msg_srv/SetStringArray`
 * /gobot_command/set_speed
-	* Type: gobot_msg_srv/SetStringArray
+	* Type: `gobot_msg_srv/SetStringArray`
 * /gobot_command/start_explore
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_command/stopGoDock
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_command/stop_explore
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_command/stop_path
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_function/goDockAfterPath
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_function/interrupt_delay
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_function/pause_path
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_function/play_path
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_function/play_point
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_function/startDocking
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_function/startLoopPath
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_function/stopDocking
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_function/stopLoopPath
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_function/stop_path
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_function/update_path
-	* Type: gobot_msg_srv/SetStringArray
+	* Type: `gobot_msg_srv/SetStringArray`
 * /gobot_motor/reset_encoders
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_motor/reset_odom
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_startup/motor_ready
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_startup/network_ready
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_startup/pose_ready
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_startup/sensors_ready
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /gobot_status/battery_percent
-	* Type: gobot_msg_srv/GetInt
+	* Type: `gobot_msg_srv/GetInt`
 * /gobot_status/charging_status
-	* Type: gobot_msg_srv/IsCharging
+	* Type: `gobot_msg_srv/IsCharging`
 * /gobot_status/get_battery
-	* Type: gobot_msg_srv/GetString
+	* Type: `gobot_msg_srv/GetString`
 * /gobot_status/get_dock_status
-	* Type: gobot_msg_srv/GetInt
+	* Type: `gobot_msg_srv/GetInt`
 * /gobot_status/get_gobot_status
-	* Type: gobot_msg_srv/GetGobotStatus
+	* Type: `gobot_msg_srv/GetGobotStatus`
 * /gobot_status/get_home
-	* Type: gobot_msg_srv/GetStringArray
+	* Type: `gobot_msg_srv/GetStringArray`
 * /gobot_status/get_loop
-	* Type: gobot_msg_srv/GetInt
+	* Type: `gobot_msg_srv/GetInt`
 * /gobot_status/get_mute
-	* Type: gobot_msg_srv/GetInt
+	* Type: `gobot_msg_srv/GetInt`
 * /gobot_status/get_name
-	* Type: gobot_msg_srv/GetString
+	* Type: `gobot_msg_srv/GetString`
 * /gobot_status/get_path
-	* Type: gobot_msg_srv/GetString
+	* Type: `gobot_msg_srv/GetString`
 * /gobot_status/get_speed
-	* Type: gobot_msg_srv/GetInt
+	* Type: `gobot_msg_srv/GetInt`
 * /gobot_status/get_stage
-	* Type: gobot_msg_srv/GetInt
+	* Type: `gobot_msg_srv/GetInt`
 * /gobot_status/get_update_status
-	* Type: gobot_msg_srv/GetString
+	* Type: `gobot_msg_srv/GetString`
 * /gobot_status/get_wifi
-	* Type: gobot_msg_srv/GetStringArray
+	* Type: `gobot_msg_srv/GetStringArray`
 * /gobot_status/set_battery
-	* Type: gobot_msg_srv/SetString
+	* Type: `gobot_msg_srv/SetString`
 * /gobot_status/set_dock_status
-	* Type: gobot_msg_srv/SetInt
+	* Type: `gobot_msg_srv/SetInt`
 * /gobot_status/set_gobot_status
-	* Type: gobot_msg_srv/SetGobotStatus
+	* Type: `gobot_msg_srv/SetGobotStatus`
 * /gobot_status/set_home
-	* Type: gobot_msg_srv/SetStringArray
+	* Type: `gobot_msg_srv/SetStringArray`
 * /gobot_status/set_loop
-	* Type: gobot_msg_srv/SetInt
+	* Type: `gobot_msg_srv/SetInt`
 * /gobot_status/set_mute
-	* Type: gobot_msg_srv/SetInt
+	* Type: `gobot_msg_srv/SetInt`
 * /gobot_status/set_name
-	* Type: gobot_msg_srv/SetString
+	* Type: `gobot_msg_srv/SetString`
 * /gobot_status/set_path
-	* Type: gobot_msg_srv/SetStringArray
+	* Type: `gobot_msg_srv/SetStringArray`
 * /gobot_status/set_speed
-	* Type: gobot_msg_srv/SetStringArray
+	* Type: `gobot_msg_srv/SetStringArray`
 * /gobot_status/set_stage
-	* Type: gobot_msg_srv/SetInt
+	* Type: `gobot_msg_srv/SetInt`
 * /gobot_status/set_wifi
-	* Type: gobot_msg_srv/SetStringArray
+	* Type: `gobot_msg_srv/SetStringArray`
 * /move_base/clear_costmaps
-	* Type: std_srvs/Empty
+	* Type: `std_srvs/Empty`
 * /move_base/make_plan
-	* Type: nav_msgs/GetPlan
+	* Type: `nav_msgs/GetPlan`
 * /request_nomotion_update
-	* Type: std_srvs/Empty	
+	* Type: `std_srvs/Empty	`
 * /static_map
-	* Type: nav_msgs/SetMap
+	* Type: `nav_msgs/SetMap`
 	
 	
-<strong> Enjoy and have fun! </strong> <br> Hope our effort on developing robotics will make a better world. 
+<strong> Enjoy and have fun! </strong> <br> `Hope our effort on developing various kinds of robots will make a better world.`

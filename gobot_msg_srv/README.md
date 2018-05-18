@@ -214,6 +214,9 @@ This package summurizes all the <strong> customized </strong> messages, services
 * /gobot_base/proximity_topic
 	* Type: `gobot_msg_srv::ProximityMsg`
 	* Brief: proximity information
+* /gobot_base/sensors_topic
+	* Type: `gobot_msg_srv/AllSensorsMsg`
+	* Brief: publish all sensors data
 * /gobot_base/set_led
 	* Type: `gobot_msg_srv::LedMsg`
 	* Brief: set led colors that robot shows in each side
@@ -276,8 +279,8 @@ This package summurizes all the <strong> customized </strong> messages, services
 	* Type: `std_msgs/String`
 	* Brief: disconnect server by publishing its IP address
 * /gobot_pc/~
-	* Type: `sensor_msgs/PointCloud2`
-	* Brief: pointcloud information for bumpers, sonars, and cliffs sensors
+	* Type: `sensor_msgs/PointCloud2` && `sensor_msgs/Range`
+	* Brief: pointcloud information for bumpers, and cliffs sensors; range information for sonars
 
 
 ### Customized service

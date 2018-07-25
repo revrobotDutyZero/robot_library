@@ -13,7 +13,6 @@ find_package(catkin REQUIRED COMPONENTS
     std_msgs
     std_srvs
     tf
-    serial
     nav_msgs
     actionlib
     costmap_2d
@@ -26,7 +25,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 ## System dependencies are found with CMake's conventions
-# find_package(Boost REQUIRED COMPONENTS system)
+find_package(Boost REQUIRED COMPONENTS system)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -61,6 +60,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 add_message_files(
     FILES
+    AllSensorsMsg.msg
     BatteryMsg.msg
     BumperMsg.msg
     CliffMsg.msg
@@ -83,11 +83,8 @@ add_service_files(
     GetEncoders.srv
     InitBack.srv
     IsCharging.srv
-    Port.srv
-    PortLaser.srv
     SendMessageToPc.srv
     SetSpeeds.srv
-    LedStrip.srv
     SetBattery.srv
     SendMap.srv
     GetGobotStatus.srv
@@ -113,6 +110,8 @@ add_service_files(
 
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
+    DEPENDENCIES
+    std_msgs
 )
 
 catkin_package(
@@ -123,7 +122,6 @@ catkin_package(
     CATKIN_DEPENDS 
         std_srvs
         tf
-        serial
         nav_msgs
         actionlib
         costmap_2d
@@ -148,6 +146,7 @@ include_directories(
 add_library(robot_class
                 src/get_robot_class.cpp
                 src/set_robot_class.cpp
+                src/robot_move_class.cpp
                 src/robot_command.cpp)
 add_dependencies(robot_class ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(robot_class ${catkin_LIBRARIES} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})

@@ -22,29 +22,41 @@ namespace robot_class {
             ~SetRobot();
             void initialize();
 
+            double degreeToRad(double degree);
+
+            double radToDegree(double rad);
+
+            double appToRobotYaw(double yaw, std::string unit = "deg");
+
+            double robotToAppYaw(double yaw, std::string unit = "deg");
+
             int stopRobotMoving();
 
             bool setStatus(int status,std::string text);
             
             bool setDock(int status);
 
-            bool setStage(int stage);
+            bool setMode(const int mode);
 
-            bool setLoop(int loop);
+            bool setStage(const int stage);
+
+            bool setLoop(const int loop);
 
             bool setWifi(std::string wifi_name,std::string wifi_password);
 
-            bool setMute(int mute);
+            bool setVolume(const int volume);
 
             bool setName(std::string robot_name);
 
             bool setBatteryLvl(std::string battery_lvl);
 
-            bool setSpeed(std::string linear, std::string angular);
+            bool setSpeedLimit(std::string linear, std::string angular);
 
             bool setHome(std::string pos_x,std::string pos_y,std::string ori_x,std::string ori_y,std::string ori_z,std::string ori_w);
 
             bool clearPath(void);
+
+            bool setNavSpeed(const char directionR, const int velocityR, const char directionL, const int velocityL);
 
             bool setMotorSpeed(char directionR, int velocityR, char directionL, int velocityL);
 
@@ -70,13 +82,19 @@ namespace robot_class {
 
             void speakChinese(std::string str);
 
+            void playSystemAudio(std::string str, int volume = -1);
+
+            void killAudio();
+
+            void changeVolume(int volume);
+
         private:
-            std::string tts_en_, tts_ch_;
+            std::string tts_en_, tts_ch_, voice_file_;
             std_srvs::Empty empty_srv;
             gobot_msg_srv::SetGobotStatus set_gobot_status_;
             gobot_msg_srv::SetInt set_dock_status_,set_stage_,set_loop_;
             gobot_msg_srv::MotorSpeedMsg motor_speed_;
-            ros::Publisher speed_pub_, sound_pub_, led_pub_, initial_pose_pub_;
+            ros::Publisher speed_pub_, nav_pub_, sound_pub_, led_pub_, initial_pose_pub_;
     };
 };
 

@@ -16,9 +16,34 @@ namespace robot_class {
     void SetRobot::initialize(){
         ros::NodeHandle nh_;
         speed_pub_ = nh_.advertise<gobot_msg_srv::MotorSpeedMsg>("/gobot_motor/motor_speed", 1);
+        nav_pub_ = nh_.advertise<gobot_msg_srv::MotorSpeedMsg>("/nav_speed", 1);
         led_pub_ = nh_.advertise<gobot_msg_srv::LedMsg>("/gobot_base/set_led", 1);
         sound_pub_ = nh_.advertise<gobot_msg_srv::SoundMsg>("/gobot_base/set_sound", 1);
         initial_pose_pub_ = nh_.advertise<geometry_msgs::PoseWithCovarianceStamped>("/initialpose", 1);
+    }
+
+
+    double SetRobot::degreeToRad(double degree){
+        return degree*3.1415926/180.0;
+    }
+
+    double SetRobot::radToDegree(double rad){
+        return rad*180.0/3.1415926;
+    }
+
+    //yaw's unit must be degree (received from application)
+    double SetRobot::appToRobotYaw(double yaw, std::string unit){
+        if(unit.compare("deg")!=0){
+            yaw = radToDegree(yaw);
+        }
+        return degreeToRad(-(yaw+90));
+    }
+
+    double SetRobot::robotToAppYaw(double yaw, std::string unit){
+        if(unit.compare("deg")!=0){
+            yaw = radToDegree(yaw);
+        }
+        return  (-yaw-90.0);
     }
 
     int SetRobot::stopRobotMoving(){
@@ -55,6 +80,12 @@ namespace robot_class {
         return ros::service::call("/gobot_status/set_dock_status",set_dock_status_);
     }
 
+    bool SetRobot::setMode(const int mode){
+        gobot_msg_srv::SetInt set_mode;
+        set_mode.request.data = mode;
+        return ros::service::call("/gobot_status/set_mode", set_mode);
+    }
+
     bool SetRobot::setStage(const int stage){
         set_stage_.request.data = stage;
         return ros::service::call("/gobot_status/set_stage", set_stage_);
@@ -72,10 +103,10 @@ namespace robot_class {
         return ros::service::call("/gobot_status/set_wifi",set_wifi); 
     }  
 
-    bool SetRobot::setMute(const int mute){
-        gobot_msg_srv::SetInt set_mute;
-        set_mute.request.data = mute;
-        return ros::service::call("/gobot_status/set_mute", set_mute);
+    bool SetRobot::setVolume(const int volume){
+        gobot_msg_srv::SetInt set_volume;
+        set_volume.request.data = volume;
+        return ros::service::call("/gobot_status/set_volume", set_volume);
     }
 
     bool SetRobot::setName(std::string robot_name){
@@ -90,7 +121,7 @@ namespace robot_class {
         return ros::service::call("/gobot_status/set_battery",set_battery);
     }
 
-    bool SetRobot::setSpeed(std::string linear, std::string angular){
+    bool SetRobot::setSpeedLimit(std::string linear, std::string angular){
         gobot_msg_srv::SetStringArray set_speed;
         set_speed.request.data.push_back(linear);
         set_speed.request.data.push_back(angular);
@@ -114,10 +145,21 @@ namespace robot_class {
         return true;
     }
 
-    //Do remember to initilize class after ros::init if setMotorSpeed is used
-    bool SetRobot::setMotorSpeed(const char directionR, const int velocityR, const char directionL, const int velocityL){ 
+    //when activating bumpers/cliffs/manual control, robot will not move
+    bool SetRobot::setNavSpeed(const char directionR, const int velocityR, const char directionL, const int velocityL){ 
         motor_speed_.directionR = std::string(1, directionR);
+        motor_speed_.velocityR = velocityR>127 ? 127 : velocityR;
+        motor_speed_.directionL = std::string(1, directionL);
+        motor_speed_.velocityL = velocityL>127 ? 127 : velocityL;
+        nav_pub_.publish(motor_speed_);
+        return true;
+    }
+
+    //Do remember to initilize class after ros::init if setMotorSpeed is used
+    //robot will move regardless of robot's sensors and conditions
+    bool SetRobot::setMotorSpeed(const char directionR, const int velocityR, const char directionL, const int velocityL){ 
         //maximum of int8 is 127
+        motor_speed_.directionR = std::string(1, directionR);
         motor_speed_.velocityR = velocityR>127 ? 127 : velocityR;
         motor_speed_.directionL = std::string(1, directionL);
         motor_speed_.velocityL = velocityL>127 ? 127 : velocityL;
@@ -181,8 +223,8 @@ namespace robot_class {
         std::string cmd = "rosnode kill /map_server";
         system(cmd.c_str());
         ros::Duration(3.0).sleep();
-        setStatus(-1,"ROBOT_READY");
         setBatteryLed();
+        setStatus(-4,"RELOAD_MAP");
     }
 
 
@@ -190,7 +232,7 @@ namespace robot_class {
         setMotorSpeed('F', 0, 'F', 0);
         setLed(0,{"white"});
         if(reset_odom)
-            ros::service::call("/gobot_motor/resetOdom",empty_srv);
+            ros::service::call("/gobot_motor/reset_odom",empty_srv);
 
         std::string cmd;
         ros::Duration(4.0).sleep();
@@ -207,7 +249,7 @@ namespace robot_class {
         setMotorSpeed('F', 0, 'F', 0);
         setLed(0,{"white"});
         if(reset_odom)
-            ros::service::call("/gobot_motor/resetOdom",empty_srv);
+            ros::service::call("/gobot_motor/reset_odom",empty_srv);
         
         std::string cmd;
         ros::Duration(4.0).sleep();
@@ -220,17 +262,50 @@ namespace robot_class {
         ros::Duration(6.0).sleep();
     }
 
-    //this two functions only work with robot equipped with speaker and ekho & festival packages
     void SetRobot::speakEnglish(std::string str){
-        tts_en_ = "echo \"" + str + "\" | festival --tts &";
-        system(tts_en_.c_str());
+        gobot_msg_srv::GetInt get_volume;
+        ros::service::call("/gobot_status/get_volume",get_volume);
+        if(get_volume.response.data != 0){
+            tts_en_ = "echo \"" + str + "\" | festival --tts &";
+            system(tts_en_.c_str());
+        }
     }
 
     void SetRobot::speakChinese(std::string str){
-        tts_ch_ = "ekho -s -30 \"" + str + "\" &";
-        system(tts_ch_.c_str());
+        gobot_msg_srv::GetInt get_volume;
+        ros::service::call("/gobot_status/get_volume",get_volume);
+        if(get_volume.response.data != 0){
+            tts_ch_ = "ekho -s -30 \"" + str + "\" &";
+            system(tts_ch_.c_str());
+        }
     }
-    //this two functions only work with robot equipped with speaker and ekho & festival packages
+
+    void SetRobot::playSystemAudio(std::string str, int volume){
+        if(volume == -1){
+            gobot_msg_srv::GetInt get_volume;
+            ros::service::call("/gobot_status/get_volume",get_volume);
+            volume = get_volume.response.data;
+        }
+        if(volume != 0){
+            changeVolume(99);
+            ros::Duration(0.5).sleep();
+            voice_file_ = "sudo play ~/catkin_ws/src/robot_navigation_stack/gobot_data/voice/" + str;
+            system(voice_file_.c_str());
+            changeVolume(volume);
+        }
+    }
+
+    void SetRobot::killAudio(){
+        std::string cmd = "sudo kill $(ps aux | grep \"sudo play\" | grep \"mp3\" | tr -s ' ' | cut -d ' ' -f2) &";
+        system(cmd.c_str());
+    }
+
+    void SetRobot::changeVolume(int volume){
+        if(volume < 0)
+            volume = 0;
+        std::string cmd = "amixer -D pulse set Master " + std::to_string(volume) + "%";
+        system(cmd.c_str());
+    }
     
 };
 

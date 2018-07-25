@@ -48,5 +48,11 @@ namespace robot_class {
         ros::service::call("/gobot_status/get_name",get_name);
         return get_name.response.data;
     }
+
+    int GetRobot::getVolume(){
+        gobot_msg_srv::GetInt get_volume;
+        ros::service::call("/gobot_status/get_volume",get_volume);
+        return get_volume.response.data;
+    }
 };
 

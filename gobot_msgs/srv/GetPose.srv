@@ -1,0 +1,7 @@
+### Get a pose, now primarily used for getting home pose
+### In the future we may want to use the covariance component for docking
+### For example if we are not very confident about the location of the charging station
+### then maybe we will search more during docking
+
+---
+geometry_msgs/Pose pose

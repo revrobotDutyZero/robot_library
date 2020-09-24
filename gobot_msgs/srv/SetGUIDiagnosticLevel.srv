@@ -1,0 +1,15 @@
+## This service change the amount of diagnostic data that will be sent to the GUI
+# We may want to add execution result as well as response here
+
+uint8 level     # level of data to be sent to GUI, must be one of the value below
+---
+##
+## Severity level constants
+## The first 5 are copied from rosgraph_msgs::Log
+##
+uint8 DEBUG=1   # debug level
+uint8 INFO=2    # general level
+uint8 WARN=4    # warning level
+uint8 ERROR=8   # error level
+uint8 FATAL=16  # fatal/critical level
+uint8 NONE=32   # report nothing

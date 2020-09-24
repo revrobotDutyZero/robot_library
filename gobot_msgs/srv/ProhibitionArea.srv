@@ -1,0 +1,9 @@
+## List of polygon points in 2D
+## For now polygons sent through this message will only prohibit the area
+## temporarily
+## In the future we may add something like a flag whether the prohibition area
+## should be saved to the map
+# bool save_to_map
+
+geometry_msgs/Point[] points
+---

@@ -1,0 +1,6 @@
+uint8 PRIMARY_PATH=0
+uint8 SECONDARY_PATH=1
+uint8 path_type
+string[] data
+---
+

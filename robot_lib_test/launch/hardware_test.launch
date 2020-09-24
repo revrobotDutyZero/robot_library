@@ -2,6 +2,7 @@
 <launch>
 
     <node pkg="robot_lib_test" type="hardware_test" name="hardware_test" output="screen" required="true">
-        <rosparam file="$(find robot_lib_test)/params/robot_lib_params.yaml" command="load" />
+        <!-- The parameters below are required for initializing the robot library -->
+        <rosparam file="$(find robot_lib_test)/params/robot_lib_params.yaml" command="load"/>
     </node>
 </launch>

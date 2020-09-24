@@ -47,7 +47,7 @@ This library includes:
     * point/route and motion control test
     * obstacle detection and avoidance test
   
-By calling the mentioned functions, users are able to control and monitor the provided robot platform. Please read source code in package `gobot_msg_srv` to know more detail.
+By calling the mentioned functions, users are able to control and monitor the provided robot platform. Please read source code in package `gobot_msg` to know more detail.
 
 
 

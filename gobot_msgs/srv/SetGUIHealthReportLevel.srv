@@ -1,0 +1,8 @@
+## This service change the amount of health report data that will be sent to the GUI
+# We may want to add execution result as well as response here
+
+uint8 level             # level of data to be sent to GUI, must be one of the value below
+---
+uint8 LEVEL_NONE = 2    # Send nothing to GUI
+uint8 LEVEL_ALL  = 1    # Send everything to GUI
+uint8 LEVEL_UNK  = 0    # Unknown

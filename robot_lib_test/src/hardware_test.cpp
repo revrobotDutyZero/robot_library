@@ -1,6 +1,6 @@
 #include <ros/ros.h>
 #include <signal.h>
-#include <gobot_msg_srv/robot_command.h>
+#include <gobot_msgs/robot_command.h>
 
 robot_class::RobotCommand robot_lib;
 
@@ -19,6 +19,9 @@ int main(int argc, char **argv)
   signal(SIGINT, mySigintHandler);
 
   robot_lib.initialize();
+
+  ROS_INFO("================== hardware_test ==================");
+
   robot_lib.stopCostmap();
   //@Programmable voice
   //ttsEnglish

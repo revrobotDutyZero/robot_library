@@ -2,6 +2,11 @@
 <launch>
 
     <node pkg="robot_lib_test" type="localization_map_test" name="localization_map_test" output="screen" required="true">
-        <rosparam file="$(find robot_lib_test)/params/robot_lib_params.yaml" command="load" />
+        <!-- The parameters below are required for initializing the robot library -->
+        <rosparam file="$(find robot_lib_test)/params/robot_lib_params.yaml" command="load"/>
+
+        <!-- The parameters below are only required for test nodes -->
+        <param name="enable_save_map"   type="bool"       value="false" />
+        <param name="map_path"          type="string"     value="~/testmap" />
     </node>
 </launch>

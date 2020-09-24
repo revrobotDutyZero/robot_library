@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(robot_lib_test)
 
+
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
 
@@ -8,7 +9,7 @@ project(robot_lib_test)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  gobot_msg_srv
+  gobot_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -213,3 +214,30 @@ target_link_libraries(point_route_test ${catkin_LIBRARIES})
 add_executable(obstacle_detection_avoidance_test src/obstacle_detection_avoidance_test.cpp)
 add_dependencies(obstacle_detection_avoidance_test ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(obstacle_detection_avoidance_test ${catkin_LIBRARIES})
+
+#############
+## Install ##
+#############
+
+install(
+    TARGETS 
+      hardware_test 
+      localization_map_test
+      point_route_test
+      obstacle_detection_avoidance_test
+
+    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+## launch file
+install(DIRECTORY
+    launch
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+
+install(DIRECTORY
+    params
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)

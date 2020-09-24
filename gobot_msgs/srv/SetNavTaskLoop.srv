@@ -1,0 +1,8 @@
+# In the dark age, loop and path are two completely different concept
+# This service is purely for backward compatible
+# In the brave new world, loop count is part of the path
+
+string nav_task_name
+
+int64 loop_count
+---
